@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\SessionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('login');
+});
+
+Route::post('/login', [SessionController::class, 'login']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
 });
