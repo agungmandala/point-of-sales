@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\SessionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', [SessionController::class, 'index'])->middleware('admin-middleware');
+
+Route::post('/login', [SessionController::class, 'login']);
+Route::get('/logout', [SessionController::class, 'logout']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('admin-middleware');
