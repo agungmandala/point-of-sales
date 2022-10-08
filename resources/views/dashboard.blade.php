@@ -10,6 +10,7 @@
     <div class="h-screen w-screen bg-slate-100 flex justify-center items-center">
       <div class="h-96 w-1/4 bg-white rounded-md p-4 flex justify-center items-center shadow-md flex-col">
         <p class="mb-12 text-2xl font-bold text-green-600">Welcome, {{ session('name') }}</p>
+        <a class="font-bold no-underline" href="/logout">Logout</a>
       </div>
     </div>
   </body>

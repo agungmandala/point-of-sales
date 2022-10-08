@@ -28,4 +28,13 @@ class SessionController extends Controller
             'login' => 'Username dan password salah!',
         ]);
     }
+
+    public function logout(Request $req)
+    {
+        Auth::logout();
+
+        $req->session()->invalidate();
+
+        return redirect('/');
+    }
 }

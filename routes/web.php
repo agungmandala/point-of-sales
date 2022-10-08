@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::post('/login', [SessionController::class, 'login']);
+Route::get('/logout', [SessionController::class, 'logout']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
