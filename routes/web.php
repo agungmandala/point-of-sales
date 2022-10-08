@@ -17,11 +17,11 @@ use App\Http\Controllers\SessionController;
 
 Route::get('/', function () {
     return view('login');
-});
+})->middleware('admin-middleware');
 
 Route::post('/login', [SessionController::class, 'login']);
 Route::get('/logout', [SessionController::class, 'logout']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-});
+})->middleware('admin-middleware');
