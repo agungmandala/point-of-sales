@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
 {
+
+    public function index()
+    {
+        return view('login');
+    }
+
     public function login(Request $req)
     {
         $credentials = $req->validate([
