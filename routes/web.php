@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionController;
 
 use App\Http\Livewire\Dashboard\Dashboard;
+use App\Http\Livewire\Categories\Categories;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,4 @@ Route::post('/login', [SessionController::class, 'login']);
 Route::get('/logout', [SessionController::class, 'logout']);
 
 Route::get('/dashboard', Dashboard::class)->middleware('admin-middleware');
+Route::get('/categories', Categories::class)->middleware('admin-middleware');
