@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\SessionController;
 
+use App\Http\Livewire\Dashboard\Dashboard;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +22,4 @@ Route::get('/', [SessionController::class, 'index'])->middleware('admin-middlewa
 Route::post('/login', [SessionController::class, 'login']);
 Route::get('/logout', [SessionController::class, 'logout']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('admin-middleware');
+Route::get('/dashboard', Dashboard::class)->middleware('admin-middleware');
