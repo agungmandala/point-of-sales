@@ -11,7 +11,7 @@
     </style>
   </head>
   <body>
-    <div class="h-screen w-screen bg-slate-100 flex" x-cloak x-data="{ isOpenSidebar: false }">
+    <div class="flex h-screen w-screen bg-slate-100" x-cloak x-data="{ isOpenSidebar: false }">
       <div class="flex flex-col">
         <div class="w-60 h-14 p-2 justify-center items-center bg-white hidden sm:flex">
           <p>POS-KU</p>
@@ -19,9 +19,9 @@
         <livewire:layout.sidebar/>
         <livewire:layout.sidebar-mobile/>
       </div>
-      <div class="flex-1 flex-col">
+      <div class="flex flex-1 flex-col">
         <livewire:layout.topbar/>
-        <div class="flex-1 p-4">
+        <div class="flex flex-1 p-4 border-2 overflow-y-auto">
           {{ $slot }}
         </div>
       </div>

@@ -1,14 +1,16 @@
-<div class="flex-1 bg-white p-4 rounded-md shadow-md" x-data="{ isOpenForm: false }">
-    <x-button.success title="Add" x-show="! isOpenForm" x-on:click="isOpenForm = true"/>
+<div class="h-full w-full bg-white p-4 rounded-md shadow-md overflow-y-auto" x-data="{ isOpenForm: false }">
+    <x-button.success title="Add" x-show="! isOpenForm" x-on:click="isOpenForm = true" class=""/>
     <div x-show="isOpenForm" class="p-4 border-2 border-green-300 w-full sm:w-50 lg:w-96">
-        <form method="POST" >
-            <input type="text" placeholder="Name" class="mb-4 border-2 rounded-md p-2 w-full" />
-            <textarea class="border-2 w-full p-2">Description</textarea>
+        <form wire:submit.prevent="save">
+            <p>Name<span class="text-pink-500 text-xs">*</span></p>
+            <input type="text" wire:model="name" class="border-2 focus:outline-none rounded-md p-2 w-full {{ $errors->has('name') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}" />
+            @error('name') <span class="text-pink-500 text-sm">{{ $message }}</span> @enderror
+            <p class="mt-4">Description</p>
+            <textarea class="border-2 focus:outline-none w-full p-2 {{ $errors->has('description') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}" wire:model="description">Description</textarea>
+            @error('description') <span class="text-pink-500 text-sm">{{ $message }}</span> @enderror
             <div class="flex flex-1 flex-row justify-end mt-4">
-                <div class="mr-2">
-                    <x-button.success title="Save"/>
-                </div>
-                <button class="border-4 border-red-500 bg-red-400 hover:bg-red-500 text-white px-7 py-2 font-bold rounded-md" x-on:click="isOpenForm = false" type="button">Close</button>
+                <button class="border-2 border-green-500 text-green-600 px-7 py-2 font-bold rounded-md w-full" x-on:click="isOpenForm = false; @this.call('resetAll')" type="button">Close</button>
+                <x-button.success type="submit" title="Save" class="ml-2 w-full"/>
             </div>
         </form>
     </div>
@@ -24,8 +26,8 @@
                 @if($categories->count() > 0)
                     @foreach($categories as $index => $category)
                         <tr class="{{ $index % 2 === 0 ? 'bg-green-200' : '' }}">
-                            <td>{{ $category->name }}</td>
-                            <td>{{ $category->description }}</td>
+                            <td class="p-2">{{ $category->name }}</td>
+                            <td class="p-2">{{ $category->description }}</td>
                         </tr>
                     @endforeach
                 @else

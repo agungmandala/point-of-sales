@@ -7,15 +7,17 @@ use Illuminate\View\Component;
 class Success extends Component
 {
     public $title;
+    public $class;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title)
+    public function __construct($title, $class)
     {
         $this->title = $title;
+        $this->class = $class;
     }
 
     /**
