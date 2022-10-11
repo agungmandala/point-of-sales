@@ -10,9 +10,10 @@ class Categories extends Component
 {
     public $categories;
 
-    // public Category $category;
     public $name;
     public $description;
+
+    public $selectedCategory;
 
     protected $rules = [
         'name' => 'required|string|max:20',
@@ -25,8 +26,13 @@ class Categories extends Component
 
     public function mount()
     {
-        $this->categories = Category::all();
+        $this->getAll();
         $this->description = '';
+    }
+
+    public function getAll()
+    {
+        $this->categories = Category::all();   
     }
 
     public function save()
@@ -40,7 +46,18 @@ class Categories extends Component
 
         $this->resetAll();
 
-        $this->categories = Category::all();
+        $this->getAll();
+    }
+
+    public function select($data)
+    {
+        $this->selectedCategory = $data;
+    }
+
+    public function test()
+    {
+        Category::where('id', $this->selectedCategory['id'])->delete();
+        $this->getAll();
     }
 
     public function resetAll()

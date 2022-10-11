@@ -21,7 +21,7 @@
       </div>
       <div class="flex flex-1 flex-col">
         <livewire:layout.topbar/>
-        <div class="flex flex-1 p-4 border-2 overflow-y-auto">
+        <div class="flex flex-1 p-4 overflow-y-auto">
           {{ $slot }}
         </div>
       </div>

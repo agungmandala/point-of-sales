@@ -1,4 +1,4 @@
-<div class="h-full w-full bg-white p-4 rounded-md shadow-md overflow-y-auto" x-data="{ isOpenForm: false }">
+<div class="h-full w-full bg-white p-4 rounded-md shadow-md overflow-y-auto" x-data="{ isOpenForm: false, isOpenModalDelete: false }">
     <x-button.success title="Add" x-show="! isOpenForm" x-on:click="isOpenForm = true" class=""/>
     <div x-show="isOpenForm" class="p-4 border-2 border-green-300 w-full sm:w-50 lg:w-96">
         <form wire:submit.prevent="save">
@@ -9,7 +9,7 @@
             <textarea class="border-2 focus:outline-none w-full p-2 {{ $errors->has('description') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}" wire:model="description">Description</textarea>
             @error('description') <span class="text-pink-500 text-sm">{{ $message }}</span> @enderror
             <div class="flex flex-1 flex-row justify-end mt-4">
-                <button class="border-2 border-green-500 text-green-600 px-7 py-2 font-bold rounded-md w-full" x-on:click="isOpenForm = false; @this.call('resetAll')" type="button">Close</button>
+                <button class="border-2 border-green-500 text-green-600 px-7 py-2 font-bold rounded-md w-full" x-on:click="isOpenForm = false; $wire.resetAll()" type="button">Close</button>
                 <x-button.success type="submit" title="Save" class="ml-2 w-full"/>
             </div>
         </form>
@@ -20,6 +20,7 @@
                 <tr>
                     <td class="p-2">Name</td>
                     <td class="p-2">Description</td>
+                    <td class="p-2">Action</td>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,7 @@
                         <tr class="{{ $index % 2 === 0 ? 'bg-green-200' : '' }}">
                             <td class="p-2">{{ $category->name }}</td>
                             <td class="p-2">{{ $category->description }}</td>
+                            <td><button x-on:click="isOpenModalDelete = true; $wire.select(@js($category))" type="button">Open</button></td>
                         </tr>
                     @endforeach
                 @else
@@ -38,4 +40,5 @@
             </tbody>
         </table>
     </div>
+    <x-modal.delete title="category" onDelete="$wire.test(), isOpenModalDelete = false"/>
 </div>
