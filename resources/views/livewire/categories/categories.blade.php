@@ -29,12 +29,20 @@
                         <tr class="{{ $index % 2 === 0 ? 'bg-green-200' : '' }}">
                             <td class="p-2">{{ $category->name }}</td>
                             <td class="p-2">{{ $category->description }}</td>
-                            <td><button x-on:click="isOpenModalDelete = true; $wire.select(@js($category))" type="button">Open</button></td>
+                            <td>
+                                <button
+                                    x-on:click="isOpenModalDelete = true; $wire.select(@js($category))"
+                                    type="button"
+                                    class="w-8 h-8 bg-red-500 hover:bg-red-600 rounded-md shadow-md flex justify-center items-center"
+                                >
+                                    <i class="fa-solid fa-trash-can text-white"></i>
+                                </button>
+                            </td>
                         </tr>
                     @endforeach
                 @else
                     <tr class="bg-green-200">
-                        <td colspan="2" class="text-center p-2">No data available in table</td>
+                        <td colspan="3" class="text-center p-2">No data available in table</td>
                     </tr>
                 @endif
             </tbody>
