@@ -12,7 +12,7 @@
                 <button @click="{{ $onDelete }}" type="button" class="text-white bg-red-500 shadow-md hover:bg-red-600 focus:outline-none rounded-md text-sm font-normal inline-flex px-5 py-2.5 text-center mr-2">
                     Yes, I'm sure
                 </button>
-                <button x-on:click="isOpenModalDelete = false" type="button" class="text-white bg-gray-400 shadow-md font-normal hover:bg-gray-500 focus:outline-none rounded-md text-sm px-5 py-2.5 hover:text-white focus:z-10">No, cancel</button>
+                <button @click="{{ $close }}" type="button" class="text-white bg-gray-400 shadow-md font-normal hover:bg-gray-500 focus:outline-none rounded-md text-sm px-5 py-2.5 hover:text-white focus:z-10">No, cancel</button>
             </div>
         </div>
     </div>
