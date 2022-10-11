@@ -1,19 +1,22 @@
 <?php
 
-namespace App\View\Components\Layout;
+namespace App\View\Components\Modal;
 
 use Illuminate\View\Component;
 
-class Sidebar extends Component
+class Modal extends Component
 {
+    public $close;
+    public $title;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($close,$title)
     {
-        //
+        $this->close = $close;
+        $this->title = $title;
     }
 
     /**
@@ -23,6 +26,6 @@ class Sidebar extends Component
      */
     public function render()
     {
-        return view('components.layout.sidebar');
+        return view('components.modal.modal');
     }
 }

@@ -5,7 +5,11 @@ module.exports = {
     "./resources/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      zIndex: {
+        '200': '200',
+      }
+    }
   },
   plugins: [],
 }

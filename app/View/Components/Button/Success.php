@@ -1,19 +1,23 @@
 <?php
 
-namespace App\View\Components\Layout;
+namespace App\View\Components\Button;
 
 use Illuminate\View\Component;
 
-class Index extends Component
+class Success extends Component
 {
+    public $title;
+    public $class;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($title, $class)
     {
-        //
+        $this->title = $title;
+        $this->class = $class;
     }
 
     /**
@@ -23,6 +27,6 @@ class Index extends Component
      */
     public function render()
     {
-        return view('components.layout.index');
+        return view('components.button.success');
     }
 }
