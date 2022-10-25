@@ -43,26 +43,23 @@
             </tbody>
         </table>
     </div>
-    <x-modal.delete title="category" close="$wire.resetAll(), isOpenModaldelete = false" onDelete="$wire.delete(), isOpenModalDelete = false"/>
-    <x-modal.modal x-show="isOpenModal" close="isOpenModal = false, $wire.resetAll()" title="{{ ($category_id === '') ? 'Add new category' : 'Edit category' }}">
-        <div wire:loading.class.remove="hidden" class="hidden flex flex-1 justify-center items-center">
-            <p>Loading data...</p>
-        </div>
-        <form wire:loading.class="hidden">
+    <x-modal.delete title="category" close="$wire.resetAll(), isOpenModalDelete = false" onDelete="$wire.delete(), isOpenModalDelete = false"/>
+    <x-modal.modal x-show="isOpenModal" close="isOpenModal = false, $wire.resetAll()" title="{{ ($category_id === '') ? 'Add New Category' : 'Edit Category' }}">
+        <form>
             <p class="text-sm font-normal block">Name<span class="text-pink-500 text-xs">*</span></p>
-            <input type="text" wire:model="name" class="border-2 focus:outline-none rounded-md p-2 w-full {{ $errors->has('name') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}" />
+            <input type="text" wire:model="name" placeholder="Category name" class="input {{ $errors->has('name') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}" />
             @error('name') <span class="text-pink-500 text-sm">{{ $message }}</span> @enderror
-            <p class="text-sm font-normal block mt-4">Description</p>
-            <textarea class="border-2 focus:outline-none w-full p-2 {{ $errors->has('description') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}" wire:model="description">Description</textarea>
+            <p class="text-sm font-normal block">Description</p>
+            <textarea class="input {{ $errors->has('description') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}" wire:model="description" placeholder="Description"></textarea>
             @error('description') <span class="text-pink-500 text-sm">{{ $message }}</span> @enderror
             <div class="flex flex-1 flex-row justify-end mt-4">
-                <button class="border-2 border-green-500 text-green-600 px-7 py-2 font-bold rounded-md w-full" x-on:click="isOpenModal = false, $wire.resetAll()" type="button">Close</button>
+                <button class="btn-default" x-on:click="isOpenModal = false, $wire.resetAll()" type="button">Close</button>
                 @if($category_id === '')
-                    <button type="button" @click="isOpenModal = false, $wire.save()" class="border-2 shadow-md border-green-500 bg-green-400 hover:bg-green-500 text-white px-7 py-2 font-bold rounded-md ml-2 w-full">
+                    <button type="button" @click="isOpenModal = false, $wire.save()" class="btn btn-success ml-2">
                         Save
                     </button>
                 @else
-                    <button type="button" @click="isOpenModal = false, $wire.edit()" class="border-2 shadow-md border-yellow-500 bg-yellow-400 hover:bg-yellow-500 text-white px-7 py-2 font-bold rounded-md ml-2 w-full">
+                    <button type="button" @click="isOpenModal = false, $wire.edit()" class="btn btn-warning ml-2">
                         Edit
                     </button>
                 @endif

@@ -9,10 +9,10 @@
                     <i class="fa-solid fa-triangle-exclamation text-red-500 text-6xl"></i>
                 </div>
                 <h3 class="mb-5 text-lg font-normal text-gray-500">Are you sure you want to delete this {{ $title }}?</h3>
-                <button @click="{{ $onDelete }}" type="button" class="text-white bg-red-500 shadow-md hover:bg-red-600 focus:outline-none rounded-md text-sm font-normal inline-flex px-5 py-2.5 text-center mr-2">
+                <button @click="{{ $onDelete }}" type="button" class="btn btn-danger mr-2">
                     Yes, I'm sure
                 </button>
-                <button @click="{{ $close }}" type="button" class="text-white bg-gray-400 shadow-md font-normal hover:bg-gray-500 focus:outline-none rounded-md text-sm px-5 py-2.5 hover:text-white focus:z-10">No, cancel</button>
+                <button @click="{{ $close }}" type="button" class="text-white bg-gray-400 shadow-md hover:bg-gray-500 focus:outline-none rounded-md px-4 py-2 hover:text-white focus:z-10">No, cancel</button>
             </div>
         </div>
     </div>
