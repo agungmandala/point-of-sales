@@ -1,5 +1,5 @@
 <div class="h-full w-full bg-white p-4 rounded-md shadow-md overflow-y-auto" x-data="{ isOpenModal: false, isOpenModalDelete: false }">
-    <x-button.success title="Add" x-on:click="isOpenModal = true" class=""/>
+    <button class="btn btn-success" x-on:click="isOpenModal = true">Add</button>
     <div>
         <table class="w-full">
             <thead>
