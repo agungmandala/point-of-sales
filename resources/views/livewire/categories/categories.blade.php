@@ -44,26 +44,44 @@
         </table>
     </div>
     <x-modal.delete title="category" close="$wire.resetAll(), isOpenModalDelete = false" onDelete="$wire.delete(), isOpenModalDelete = false"/>
-    <x-modal.modal x-show="isOpenModal" close="isOpenModal = false, $wire.resetAll()" title="{{ ($category_id === '') ? 'Add New Category' : 'Edit Category' }}">
-        <form>
-            <p class="text-sm font-normal block">Name<span class="text-pink-500 text-xs">*</span></p>
-            <input type="text" wire:model="name" placeholder="Category name" class="input {{ $errors->has('name') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}" />
-            @error('name') <span class="text-pink-500 text-sm">{{ $message }}</span> @enderror
-            <p class="text-sm font-normal block">Description</p>
-            <textarea class="input {{ $errors->has('description') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}" wire:model="description" placeholder="Description"></textarea>
-            @error('description') <span class="text-pink-500 text-sm">{{ $message }}</span> @enderror
-            <div class="flex flex-1 flex-row justify-end mt-4">
-                <button class="btn-default" x-on:click="isOpenModal = false, $wire.resetAll()" type="button">Close</button>
-                @if($category_id === '')
-                    <button type="button" @click="isOpenModal = false, $wire.save()" class="btn btn-success ml-2">
-                        Save
-                    </button>
-                @else
-                    <button type="button" @click="isOpenModal = false, $wire.edit()" class="btn btn-warning ml-2">
-                        Edit
-                    </button>
-                @endif
-            </div>
-        </form>
+    <x-modal.modal x-show="isOpenModal">
+        <div class="flex flex-1 pt-4 px-6">
+            <p class="font-bold text-black">
+                {{ ($category_id === '') ? 'Add New Category' : 'Edit Category' }}
+            </p>
+            <button
+                @click="isOpenModal = false, $wire.resetAll()"
+                type="button"
+                class="top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg p-1.5 ml-auto inline-flex justify-center items-center h-8 w-8">
+                <i class="fa-solid fa-xmark text-xl text-center"></i>
+            </button>
+        </div>
+        <div class="p-6 pt-2">
+            <form>
+                <p class="text-sm font-normal block">Name<span class="text-pink-500 text-xs">*</span></p>
+                <input type="text" wire:model="name" placeholder="Category name" class="input {{ $errors->has('name') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}" />
+                @error('name') <span class="text-pink-500 text-sm">{{ $message }}</span> @enderror
+                <p class="text-sm font-normal block">Description</p>
+                <textarea
+                    class="input {{ $errors->has('description') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}"
+                    wire:model="description"
+                    placeholder="Description"
+                >
+                </textarea>
+                @error('description') <span class="text-pink-500 text-sm">{{ $message }}</span> @enderror
+                <div class="flex flex-1 flex-row justify-end mt-4">
+                    <button class="btn-default" x-on:click="isOpenModal = false, $wire.resetAll()" type="button">Close</button>
+                    @if($category_id === '')
+                        <button type="button" @click="isOpenModal = false, $wire.save()" class="btn btn-success ml-2">
+                            Save
+                        </button>
+                    @else
+                        <button type="button" @click="isOpenModal = false, $wire.edit()" class="btn btn-warning ml-2">
+                            Edit
+                        </button>
+                    @endif
+                </div>
+            </form>
+        </div>
     </x-modal.modal>
 </div>

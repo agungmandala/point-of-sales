@@ -2,15 +2,7 @@
     <div class="relative p-4 w-full max-w-md h-full md:h-auto">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow">
-            <div class="flex flex-1 pt-4 px-6">
-                <p class="font-bold text-black">{{ $title }}</p>
-                <button @click="{{ $close }}" type="button" class="top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg p-1.5 ml-auto inline-flex justify-center items-center h-8 w-8">
-                    <i class="fa-solid fa-xmark text-xl text-center"></i>
-                </button>
-            </div>
-            <div class="p-6 pt-2">
-                {{ $slot }}
-            </div>
+            {{ $slot }}
         </div>
     </div>
 </div> 
