@@ -1,7 +1,7 @@
 <div class="h-full w-full bg-white p-4 rounded-md shadow-md overflow-y-auto" x-data="{ isOpenModal: @entangle('showModal'), isOpenModalDelete: @entangle('showModalDelete') }">
     <button class="btn btn-success" x-on:click="isOpenModal = true">Add</button>
     <div>
-        <table class="w-full">
+        <table class="w-full mb-4">
             <thead>
                 <tr>
                     <td class="p-2 font-bold text-gray-700">Name</td>
@@ -42,6 +42,7 @@
                 @endif
             </tbody>
         </table>
+        {{ $categories->links() }}
     </div>
     {{-- Modal delete category start --}}
     <x-modal x-show="isOpenModalDelete">

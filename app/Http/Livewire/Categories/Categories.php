@@ -5,10 +5,11 @@ namespace App\Http\Livewire\Categories;
 use App\Models\Category;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Categories extends Component
 {
-    public $categories;
+    use WithPagination;
 
     public $category_id;
     public $name;
@@ -28,14 +29,8 @@ class Categories extends Component
 
     public function mount()
     {
-        $this->getAll();
         $this->category_id = '';
         $this->description = '';
-    }
-
-    public function getAll()
-    {
-        $this->categories = Category::all();   
     }
 
     public function save()
@@ -48,7 +43,7 @@ class Categories extends Component
         $category->save();
 
         $this->resetAll();
-        $this->getAll();
+        $this->resetPage();
     }
 
     public function select($data)
@@ -61,7 +56,7 @@ class Categories extends Component
     public function delete()
     {
         Category::where('id', $this->category_id)->delete();
-        $this->getAll();
+        $this->resetPage();
         $this->resetAll();
     }
 
@@ -76,7 +71,7 @@ class Categories extends Component
             );
 
         $this->resetAll();
-        $this->getAll();
+        $this->resetPage();
     }
 
     public function resetAll()
@@ -91,6 +86,8 @@ class Categories extends Component
 
     public function render()
     {
-        return view('livewire.categories.categories')->layout('app');
+        return view('livewire.categories.categories', [
+            'categories' => Category::paginate(10),
+        ])->layout('app');
     }
 }
