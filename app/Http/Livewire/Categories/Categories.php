@@ -14,6 +14,9 @@ class Categories extends Component
     public $name;
     public $description;
 
+    public $showModal = false;
+    public $showModalDelete = false;
+
     protected $rules = [
         'name' => 'required|string|max:20',
         'description' => 'string|max:200',
@@ -82,6 +85,8 @@ class Categories extends Component
         $this->name = '';
         $this->description = '';
         $this->resetErrorBag();
+        $this->showModal = false;
+        $this->showModalDelete = false;
     }
 
     public function render()

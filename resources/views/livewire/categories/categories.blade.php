@@ -1,20 +1,20 @@
-<div class="h-full w-full bg-white p-4 rounded-md shadow-md overflow-y-auto" x-data="{ isOpenModal: false, isOpenModalDelete: false }">
-    <x-button.success title="Add" x-on:click="isOpenModal = true" class=""/>
+<div class="h-full w-full bg-white p-4 rounded-md shadow-md overflow-y-auto" x-data="{ isOpenModal: @entangle('showModal'), isOpenModalDelete: @entangle('showModalDelete') }">
+    <button class="btn btn-success" x-on:click="isOpenModal = true">Add</button>
     <div>
         <table class="w-full">
             <thead>
                 <tr>
-                    <td class="p-2">Name</td>
-                    <td class="p-2">Description</td>
-                    <td class="p-2 text-center">Action</td>
+                    <td class="p-2 font-bold text-gray-700">Name</td>
+                    <td class="p-2 font-bold text-gray-700">Description</td>
+                    <td class="p-2 text-center font-bold text-gray-700">Action</td>
                 </tr>
             </thead>
             <tbody>
                 @if($categories->count() > 0)
                     @foreach($categories as $index => $category)
                         <tr class="{{ $index % 2 === 0 ? 'bg-green-200' : '' }}">
-                            <td class="p-2">{{ $category->name }}</td>
-                            <td class="p-2">{{ $category->description }}</td>
+                            <td class="p-2 text-gray-800">{{ $category->name }}</td>
+                            <td class="p-2 text-gray-800">{{ $category->description }}</td>
                             <td>
                                 <div class="flex flex-1 justify-center items-center">
                                     <button
@@ -43,30 +43,71 @@
             </tbody>
         </table>
     </div>
-    <x-modal.delete title="category" close="$wire.resetAll(), isOpenModaldelete = false" onDelete="$wire.delete(), isOpenModalDelete = false"/>
-    <x-modal.modal x-show="isOpenModal" close="isOpenModal = false, $wire.resetAll()" title="{{ ($category_id === '') ? 'Add new category' : 'Edit category' }}">
-        <div wire:loading.class.remove="hidden" class="hidden flex flex-1 justify-center items-center">
-            <p>Loading data...</p>
-        </div>
-        <form wire:loading.class="hidden">
-            <p class="text-sm font-normal block">Name<span class="text-pink-500 text-xs">*</span></p>
-            <input type="text" wire:model="name" class="border-2 focus:outline-none rounded-md p-2 w-full {{ $errors->has('name') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}" />
-            @error('name') <span class="text-pink-500 text-sm">{{ $message }}</span> @enderror
-            <p class="text-sm font-normal block mt-4">Description</p>
-            <textarea class="border-2 focus:outline-none w-full p-2 {{ $errors->has('description') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}" wire:model="description">Description</textarea>
-            @error('description') <span class="text-pink-500 text-sm">{{ $message }}</span> @enderror
-            <div class="flex flex-1 flex-row justify-end mt-4">
-                <button class="border-2 border-green-500 text-green-600 px-7 py-2 font-bold rounded-md w-full" x-on:click="isOpenModal = false, $wire.resetAll()" type="button">Close</button>
-                @if($category_id === '')
-                    <button type="button" @click="isOpenModal = false, $wire.save()" class="border-2 shadow-md border-green-500 bg-green-400 hover:bg-green-500 text-white px-7 py-2 font-bold rounded-md ml-2 w-full">
-                        Save
-                    </button>
-                @else
-                    <button type="button" @click="isOpenModal = false, $wire.edit()" class="border-2 shadow-md border-yellow-500 bg-yellow-400 hover:bg-yellow-500 text-white px-7 py-2 font-bold rounded-md ml-2 w-full">
-                        Edit
-                    </button>
-                @endif
+    {{-- Modal delete category start --}}
+    <x-modal x-show="isOpenModalDelete">
+        <button
+            @click="$wire.resetAll()"
+            type="button"
+            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg p-1.5 ml-auto inline-flex justify-center items-center h-8 w-8"
+        >
+            <i class="fa-solid fa-xmark text-xl text-center"></i>
+        </button>
+        <div class="p-6 text-center">
+            <div class="mx-auto mb-4 w-14 h-14">
+                <i class="fa-solid fa-triangle-exclamation text-red-500 text-6xl"></i>
             </div>
-        </form>
-    </x-modal.modal>
+            <h3 class="mb-5 text-lg font-normal text-gray-500">Are you sure you want to delete this category?</h3>
+            <button @click="$wire.delete()" type="button" class="btn btn-danger mr-2">
+                Yes, I'm sure
+            </button>
+            <button @click="$wire.resetAll()" type="button" class="btn-default">No, cancel</button>
+        </div>
+    </x-modal>
+    {{-- Modal delete category end --}}
+    {{-- Modal category start --}}
+    <x-modal x-show="isOpenModal">
+        <div class="flex flex-1 pt-4 px-6">
+            <p class="font-bold text-gray-700">
+                {{ ($category_id === '') ? 'Add New Category' : 'Edit Category' }}
+            </p>
+            <button
+                @click="$wire.resetAll()"
+                type="button"
+                class="top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg p-1.5 ml-auto inline-flex justify-center items-center h-8 w-8">
+                <i class="fa-solid fa-xmark text-xl text-center"></i>
+            </button>
+        </div>
+        <div class="p-6 pt-2">
+            <form>
+                <div class="mb-4">
+                    <p class="text-sm block text-gray-800">Name<span class="text-pink-500 text-xs">*</span></p>
+                    <input type="text" wire:model="name" placeholder="Category name" class="input {{ $errors->has('name') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}" />
+                    @error('name') <span class="text-pink-500 text-sm">{{ $message }}</span> @enderror
+                </div>
+                <div>
+                    <p class="text-sm block text-gray-800">Description</p>
+                    <textarea
+                        class="input {{ $errors->has('description') ? 'border-pink-500 focus:border-pink-600' : 'focus:border-green-500' }}"
+                        wire:model="description"
+                        placeholder="Description"
+                    >
+                    </textarea>
+                    @error('description') <span class="text-pink-500 text-sm">{{ $message }}</span> @enderror
+                </div>
+                <div class="flex flex-1 flex-row justify-end mt-4">
+                    <button class="btn-default" x-on:click="$wire.resetAll()" type="button">Close</button>
+                    @if($category_id === '')
+                        <button type="button" @click="$wire.save()" class="btn btn-success ml-2">
+                            Save
+                        </button>
+                    @else
+                        <button type="button" @click="$wire.edit()" class="btn btn-warning ml-2">
+                            Edit
+                        </button>
+                    @endif
+                </div>
+            </form>
+        </div>
+    </x-modal>
+    {{-- Modal category end --}}
 </div>
