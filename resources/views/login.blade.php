@@ -8,12 +8,14 @@
   </head>
   <body>
     <div class="h-screen w-screen bg-slate-100 flex justify-center items-center">
-      <div class="h-96 w-1/4 bg-white rounded-md p-4 flex justify-center items-center shadow-md flex-col space-y-5">
+      <div class="h-96 w-1/4 bg-white rounded-md flex justify-center items-center shadow-md flex-col space-y-5">
         <p class="mb-12 text-2xl font-bold text-green-600">Login</p>
-        <form action="/login" method="POST" >
+        <form action="/login" method="POST" class="w-full p-4">
           @csrf
-          <input type="text" name="username" class="input" autocomplete="off" placeholder="Username" />
-          <input type="password" name="password" class="input" placeholder="Password" />
+          <input type="text" name="username" class="input mb-4" autocomplete="off" placeholder="Username" />
+          <div>
+            <input type="password" name="password" class="input" placeholder="Password" />
+          </div>
           @error('login')
             <div class="mt-2 mb-2 p-4 border border-red-500 rounded-md">
               <p class="text-red-500 text-sm">{{ $message }}</p>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Modal;
+namespace App\View\Components;
 
 use Illuminate\View\Component;
 
@@ -13,6 +13,7 @@ class Modal extends Component
      */
     public function __construct()
     {
+        //
     }
 
     /**
@@ -22,6 +23,6 @@ class Modal extends Component
      */
     public function render()
     {
-        return view('components.modal.modal');
+        return view('components.modal');
     }
 }
