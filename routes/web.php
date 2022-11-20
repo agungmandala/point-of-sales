@@ -6,6 +6,7 @@ use App\Http\Controllers\SessionController;
 
 use App\Http\Livewire\Dashboard\Dashboard;
 use App\Http\Livewire\Categories\Categories;
+use App\Http\Livewire\Products\Products;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,4 @@ Route::get('/logout', [SessionController::class, 'logout']);
 
 Route::get('/dashboard', Dashboard::class)->middleware('admin-middleware');
 Route::get('/categories', Categories::class)->middleware('admin-middleware');
+Route::get('/products', Products::class)->middleware('admin-middleware');

@@ -17,4 +17,7 @@
   <div class="flex-1 {{ (request()->segment(1) === 'categories') ? 'bg-green-200' : '' }} hover:bg-green-200 w-full p-2">
     <a href="/categories" class="inline-block w-full h-full text-gray-800">Categories</a>
   </div>
+  <div class="flex-1 {{ (request()->segment(1) === 'products') ? 'bg-green-200' : '' }} hover:bg-green-200 w-full p-2">
+    <a href="/products" class="inline-block w-full h-full text-gray-800">Products</a>
+  </div>
 </div>
